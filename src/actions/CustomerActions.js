@@ -1,47 +1,47 @@
 import * as types from "./ActionTypes";
-import * as api from "../api/ProjectApi";
+import * as api from "../api/CustomerApi";
 
-export function getProjectSuccess(data) {
+function getC(data) {
     return {
-        type: types.GET_PROJECT,
+        type: types.GET_TASK,
         data
     }
 }
 
-export function getAllUserProjects(data) {
+function getAllC(data) {
     return {
-        type: types.GET_ALL_USER_PROJECTS,
+        type: types.GET_ALL_TASKS,
         data
     }
 }
 
-export function updateProj(data) {
+function deleteC() {
     return {
-        type: types.UPDATE_PROJECT,
+        type: types.DELETE_SPRINT
+    }
+}
+
+function updateC(data) {
+    return {
+        type: types.UPDATE_SPRINT,
         data
     }
 }
 
-export function deleteProj() {
+function addC(data) {
     return {
-        type: types.DELETE_PROJECT
-    }
-}
-
-export function addProj(data) {
-    return {
-        type: types.ADD_PROJECT,
+        type: types.ADD_SPRINT,
         data
     }
 }
 
 // CALLS ---------------------------------------------------------------------------------------------------------------
-export function getProjects(userId) {
+export function getCustomer(customerId) {
     return function (dispatch) {
-        return api.getAllProjects(userId)
+        return api.getCustomer(customerId)
             .then(response => {
                 response.json().then((json) =>
-                    dispatch(getAllUserProjects(json)));
+                    dispatch(getC(json)));
             })
             .catch(err => {
                 console.log(err);
@@ -49,12 +49,13 @@ export function getProjects(userId) {
     }
 }
 
-export function getProject(projectId) {
-    return function (dispatch) {
-        return api.getProject(projectId)
+export function getAllCustomers() {
+    return function(dispatch) {
+        return api.getAllCustomers()
             .then(response => {
-                response.json().then((json) =>
-                    dispatch(getProjectSuccess(json)));
+                response.json().then(json => {
+                    dispatch(getAllC(json));
+                })
             })
             .catch(err => {
                 console.log(err);
@@ -62,13 +63,11 @@ export function getProject(projectId) {
     }
 }
 
-export function deleteProject(projectId) {
+export function deleteCustomer(customerId) {
     return function (dispatch) {
-        return api.deleteProject(projectId)
+        return api.removeCustomer(customerId)
             .then(response => {
-                if (response.status === 200) {
-                    dispatch(deleteProj());
-                }
+                dispatch(deleteC());
             })
             .catch(err => {
                 console.log(err);
@@ -76,12 +75,12 @@ export function deleteProject(projectId) {
     }
 }
 
-export function addProject(project) {
+export function addCustomer(customer) {
     return function (dispatch) {
-        return api.postNewProject(project)
+        return api.addNewCustomer(customer)
             .then(response => {
                 response.json().then((json) =>
-                    dispatch(addProj(json)));
+                    dispatch(addC(json)));
             })
             .catch(err => {
                 console.log(err);
@@ -89,12 +88,12 @@ export function addProject(project) {
     }
 }
 
-export function updateProject(project) {
+export function updateCustomer(customer) {
     return function (dispatch) {
-        return api.updateProject(project)
+        return api.updateCustomer(customer)
             .then(response => {
                 response.json().then((json) =>
-                dispatch(updateProj(json)));
+                    dispatch(updateC(json)));
             })
             .catch(err => {
                 console.log(err);

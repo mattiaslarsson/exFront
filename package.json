@@ -8,11 +8,13 @@
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "redux": "latest",
-    "react-redux": "latest",
-    "redux-immutable-state-invariant": "latest",
     "react-file-uploader": "^0.3.3",
-    "superagent": "^3.5.0"
+    "react-redux": "latest",
+    "redux": "latest",
+    "redux-devtools-extension": "^2.13.0",
+    "redux-immutable-state-invariant": "latest",
+    "redux-thunk": "latest",
+    "whatwg-fetch": "^2.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

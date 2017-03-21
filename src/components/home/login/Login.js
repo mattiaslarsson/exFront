@@ -2,38 +2,30 @@
  * Created by Mattias on 2017-03-01.
  */
 import React, {Component} from 'react';
-import Request from 'superagent';
+import {connect} from 'react-redux';
+import {bindActionCreators} from "redux";
+import * as userActions from '../../../actions/UserActions';
 
-export default class Login extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = ({
-            username: '',
-            password: ''
-        });
+        this.user = {
+            username: "",
+            password: ""
+        };
+        this.doLogin = this.doLogin.bind(this);
     }
 
     changeUsername(event) {
-        this.setState({username: event.target.value});
+        this.user.username = event.target.value;
     }
 
     changePassword(event) {
-        this.setState({password: event.target.value});
+        this.user.password = event.target.value;
     }
 
-    doLogin() {
-        console.log(JSON.stringify({username: this.state.username, password: this.state.password}));
-        Request
-            .post('http://localhost:8080/login')
-            .set("Content-Type", "application/json")
-            .send({username: this.state.username, password: this.state.password})
-            .end((err, res) => {
-                if(err || !res.ok) {
-                    console.log(err);
-                } else {
-                    this.props.onLoggedIn(res);
-                }
-            });
+    doLogin(username, password) {
+        this.props.actions.doLogin(this.user.username, this.user.password);
     }
 
     render() {
@@ -46,3 +38,16 @@ export default class Login extends Component {
         )
     }
 }
+function mapStateToProps(state, ownProps) {
+    return {
+        data: state
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(userActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

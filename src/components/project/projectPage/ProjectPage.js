@@ -5,25 +5,43 @@ import * as projectActions from "../../../actions/ProjectActions";
 
 class projectPage extends React.Component {
 
+    currentProjectId = 0;
+
     constructor(props) {
         super(props);
-        this.props.actions.getProject(1);
-        this.onButtonClick = this.onButtonClick.bind(this);
+        this.onButtonGetAllClick = this.onButtonGetAllClick.bind(this);
+        this.onButtonGetOneClick = this.onButtonGetOneClick.bind(this);
+
     }
 
-    onButtonClick() {
-        let id = 2;
-        if (this.props.project.id !== 1) {
-            id = 1;
+    onButtonGetAllClick() {
+        this.props.actions.getProjects();
+    }
+
+    onButtonGetOneClick() {
+        this.props.actions.getProject(this.currentProjectId);
+    }
+
+    changeProjectId(event) {
+        this.currentProjectId = event.target.value;
+    }
+
+    displayProject() {
+        if (this.props.project.project) {
+            return (
+                <p>{this.props.project.project.projectTitle} {this.props.project.project.id}</p>
+            )
         }
-        this.props.actions.getProject(id);
     }
 
     render() {
+        console.log(JSON.stringify(this.props.project));
         return (
             <div>
-                <p>{this.props.project.id} {this.props.project.text}</p>
-                <button onClick={this.onButtonClick}>Click</button>
+                <input type="text" placeholder="Project ID" onChange={(event) => this.changeProjectId(event)}/>
+                <button onClick={this.onButtonGetAllClick}>Click to get all</button>
+                <button onClick={this.onButtonGetOneClick}>Click to get {this.currentProjectId}</button>
+                {this.displayProject()}
             </div>
         )
     };
@@ -31,13 +49,14 @@ class projectPage extends React.Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        project: state.projects
+        project: state.projects,
+        users: state.users
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(projectActions, dispatch)
+        actions: bindActionCreators(projectActions, dispatch),
     }
 }
 
