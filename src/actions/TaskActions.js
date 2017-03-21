@@ -18,20 +18,20 @@ function getAllT(data) {
 
 function deleteT() {
     return {
-        type: types.DELETE_SPRINT
+        type: types.DELETE_TASK
     }
 }
 
 function updateT(data) {
     return {
-        type: types.UPDATE_SPRINT,
+        type: types.UPDATE_TASK,
         data
     }
 }
 
 function addT(data) {
     return {
-        type: types.ADD_SPRINT,
+        type: types.ADD_TASK,
         data
     }
 }

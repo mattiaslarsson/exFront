@@ -3,34 +3,34 @@ import * as api from "../api/CustomerApi";
 
 function getC(data) {
     return {
-        type: types.GET_TASK,
+        type: types.GET_CUSTOMER,
         data
     }
 }
 
 function getAllC(data) {
     return {
-        type: types.GET_ALL_TASKS,
+        type: types.GET_ALL_CUSTOMERS,
         data
     }
 }
 
 function deleteC() {
     return {
-        type: types.DELETE_SPRINT
+        type: types.DELETE_CUSTOMER
     }
 }
 
 function updateC(data) {
     return {
-        type: types.UPDATE_SPRINT,
+        type: types.UPDATE_CUSTOMER,
         data
     }
 }
 
 function addC(data) {
     return {
-        type: types.ADD_SPRINT,
+        type: types.ADD_CUSTOMER,
         data
     }
 }

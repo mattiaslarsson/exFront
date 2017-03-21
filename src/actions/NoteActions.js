@@ -4,27 +4,27 @@ import store from '../index';
 
 function getN(data) {
     return {
-        type: types.GET_TASK,
+        type: types.GET_NOTE,
         data
     }
 }
 
 function deleteN() {
     return {
-        type: types.DELETE_SPRINT
+        type: types.DELETE_NOTE
     }
 }
 
 function updateN(data) {
     return {
-        type: types.UPDATE_SPRINT,
+        type: types.UPDATE_NOTE,
         data
     }
 }
 
 function addN(data) {
     return {
-        type: types.ADD_SPRINT,
+        type: types.ADD_NOTE,
         data
     }
 }

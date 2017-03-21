@@ -14,7 +14,6 @@ export default class App extends Component {
                 <ProjectPage />
                 <User />
             </div>
-
         );
     }
 }
