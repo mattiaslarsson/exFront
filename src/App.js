@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import ProjectPage from './components/project/projectPage/ProjectPage';
 import Login from './components/home/login/Login';
 import User from './components/project/user/User';
+import AddProject from './components/project/addProject/AddProject';
 import "./App.css";
 
 export default class App extends Component {
@@ -13,6 +14,9 @@ export default class App extends Component {
                 <Login />
                 <ProjectPage />
                 <User />
+                <hr />
+                <br />
+                <AddProject />
             </div>
         );
     }
