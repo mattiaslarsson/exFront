@@ -1,34 +1,36 @@
 import * as types from "./ActionTypes";
 import * as api from "../api/ProjectApi";
 
-export function getProjectSuccess(data) {
+// ACTION PRODUCERS ----------------------------------------------------------------------------------------------------
+function getProjectSuccess(data) {
     return {
         type: types.GET_PROJECT,
         data
     }
 }
 
-export function getAllUserProjects(data) {
+function getAllUserProjects(data) {
     return {
         type: types.GET_ALL_USER_PROJECTS,
         data
     }
 }
 
-export function updateProj(data) {
+function updateProj(data) {
     return {
         type: types.UPDATE_PROJECT,
         data
     }
 }
 
-export function deleteProj() {
+function deleteProj(projectId) {
     return {
-        type: types.DELETE_PROJECT
+        type: types.DELETE_PROJECT,
+        projectId
     }
 }
 
-export function addProj(data) {
+function addProj(data) {
     return {
         type: types.ADD_PROJECT,
         data

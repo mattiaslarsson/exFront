@@ -1,6 +1,7 @@
 import * as types from "./ActionTypes";
 import * as api from "../api/CustomerApi";
 
+// ACTION PRODUCERS ----------------------------------------------------------------------------------------------------
 function getC(data) {
     return {
         type: types.GET_CUSTOMER,
@@ -15,9 +16,10 @@ function getAllC(data) {
     }
 }
 
-function deleteC() {
+function deleteC(customerId) {
     return {
-        type: types.DELETE_CUSTOMER
+        type: types.DELETE_CUSTOMER,
+        customerId
     }
 }
 

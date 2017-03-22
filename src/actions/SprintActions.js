@@ -2,6 +2,7 @@ import * as types from "./ActionTypes";
 import * as api from "../api/SprintApi";
 import store from '../index';
 
+// ACTION PRODUCERS ----------------------------------------------------------------------------------------------------
 function getS(data) {
     return {
         type: types.GET_SPRINT,
@@ -81,7 +82,6 @@ export function updateSprint(sprint) {
 }
 
 // STATE ---------------------------------------------------------------------------------------------------------------
-
 let getProjId = function() {
     return store.getState().projects.project.id;
 };

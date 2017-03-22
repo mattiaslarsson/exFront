@@ -2,6 +2,7 @@ import * as types from "./ActionTypes";
 import * as api from "../api/NoteApi";
 import store from '../index';
 
+// ACTION PRODUCERS ----------------------------------------------------------------------------------------------------
 function getN(data) {
     return {
         type: types.GET_NOTE,
@@ -82,7 +83,6 @@ export function updateNote(note) {
 }
 
 // STATE ---------------------------------------------------------------------------------------------------------------
-
 let getProjId = function() {
     return store.getState().projects.project.id;
 };

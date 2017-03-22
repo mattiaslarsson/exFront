@@ -1,6 +1,7 @@
 import * as types from "./ActionTypes";
 import * as api from "../api/UserApi";
 
+// ACTION PRODUCERS ----------------------------------------------------------------------------------------------------
 function loginSuccess(data) {
     return {type: types.LOGIN_SUCCESS, data, loggedIn: true}
 }

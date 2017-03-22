@@ -2,6 +2,7 @@ import * as types from "./ActionTypes";
 import * as api from "../api/TaskApi";
 import store from '../index';
 
+// ACTION PRODUCERS ----------------------------------------------------------------------------------------------------
 function getT(data) {
     return {
         type: types.GET_TASK,
@@ -16,9 +17,10 @@ function getAllT(data) {
     }
 }
 
-function deleteT() {
+function deleteT(taskId) {
     return {
-        type: types.DELETE_TASK
+        type: types.DELETE_TASK,
+        taskId
     }
 }
 
@@ -68,7 +70,7 @@ export function deleteTask(taskId) {
     return function (dispatch) {
         return api.deleteTask(getProjId(), taskId)
             .then(response => {
-                dispatch(deleteT());
+                dispatch(deleteT(taskId));
             })
             .catch(err => {
                 console.log(err);
@@ -103,7 +105,6 @@ export function updateTask(task) {
 }
 
 // STATE ---------------------------------------------------------------------------------------------------------------
-
 let getProjId = function() {
     return store.getState().projects.project.id;
 };
