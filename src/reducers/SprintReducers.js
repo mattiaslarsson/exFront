@@ -1,6 +1,6 @@
 import * as types from '../actions/ActionTypes';
 
-export default function(state, action) {
+export default function(state = {}, action) {
     switch (action.type) {
         case types.GET_SPRINT:
             return Object.assign({}, state,
@@ -21,7 +21,7 @@ export default function(state, action) {
         case types.DELETE_SPRINT:
             return Object.assign({}, state,
                 {
-                    currSprint: null
+                    currSprint: {}
                 });
 
         default:

@@ -1,6 +1,6 @@
 import * as types from '../actions/ActionTypes';
 
-export default function(state, action) {
+export default function(state = {}, action) {
     switch(action.type){
         case types.GET_CUSTOMER:
             return Object.assign({}, state,
