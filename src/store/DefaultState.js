@@ -16,12 +16,5 @@ export const defaultState = {
     },
     "notes": {
         "currNote": {}
-    },
-    "sprints": {
-        "currSprint": {}
-    },
-    "tasks": {
-        "currTask": {},
-        "taskList": []
     }
 };

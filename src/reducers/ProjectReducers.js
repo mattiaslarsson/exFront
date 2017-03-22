@@ -2,16 +2,16 @@ import * as types from "../actions/ActionTypes";
 
 export default function projectReducer(state = {}, action) {
 
-    var index = -1;
-    var updatedList = [];
-    var found = false;
+    let index = -1;
+    let updatedList = [];
+    let found = false;
 
     switch (action.type) {
         // Project
         case types.GET_ALL_USER_PROJECTS:
             return Object.assign({}, state,
                 {
-                    projectList: action.data.projects
+                    projectList: action.data
                 });
         case types.GET_PROJECT:
             return Object.assign({}, state,
@@ -20,26 +20,27 @@ export default function projectReducer(state = {}, action) {
                 });
 
         case types.ADD_PROJECT:
+            updatedList = JSON.parse(JSON.stringify(state.projectList));
+            updatedList.push(action.data);
             return Object.assign({}, state,
                 {
                     currProject: action.data,
-                    projectList: state.projectList.push(action.data)
+                    projectList: updatedList
                 });
         case types.UPDATE_PROJECT:
             index = state.projectList.findIndex(item => item.id === action.data.id);
-            updatedList = state.projectList;
-            if (index !== -1) {
-                updatedList = state.projectList.splice(index, 1, action.data);
-            }
+            updatedList = JSON.parse(JSON.stringify(state.projectList));
+            updatedList = updatedList.splice(index, 1, action.data);
             return Object.assign({}, state,
                 {
                     currProject: action.data,
                     projectList: updatedList
                 });
         case types.DELETE_PROJECT:
+            updatedList = JSON.parse(JSON.stringify(state.projectList));
             return Object.assign({}, state,
                 {
-                    projectList: state.projectList.filter(item => item.id != action.projectId)
+                    projectList: updatedList.filter(item => item.id !== action.projectId)
                 });
 
         // Sprint
@@ -50,18 +51,19 @@ export default function projectReducer(state = {}, action) {
                 });
 
         case types.ADD_SPRINT:
+            updatedList = JSON.parse(JSON.stringify(state.currProject.projectSprints));
             return Object.assign({}, state,
                 {
                     currSprint: action.data,
                     currProject: {
-                        projectSprints: state.currProject.projectSprints.push(action.data)
+                        projectSprints: updatedList.push(action.data)
                     }
                 });
         case types.UPDATE_SPRINT:
             index = state.currProject.projectSprints.findIndex(item => item.id === action.data.id);
-            updatedList = state.currProject.projectSprints;
+            updatedList = JSON.parse(JSON.stringify(state.currProject.projectSprints));
             if (index !== -1) {
-                updatedList = state.currProject.projectSprints.splice(index, 1, action.data);
+                updatedList.splice(index, 1, action.data);
             }
             return Object.assign({}, state,
                 {
@@ -71,11 +73,12 @@ export default function projectReducer(state = {}, action) {
                     }
                 });
         case types.DELETE_SPRINT:
+            updatedList = JSON.parse(JSON.stringify(state.currProject.projectSprints));
             return Object.assign({}, state,
                 {
                     currSprint: {},
                     currProject: {
-                        projectSprints: state.currProject.projectSprints.filter(item => item.id != action.sprintId)
+                        projectSprints: updatedList.filter(item => item.id != action.sprintId)
                     }
                 });
 
@@ -92,17 +95,19 @@ export default function projectReducer(state = {}, action) {
                 });
 
         case types.ADD_TASK:
+            updatedList = JSON.parse(JSON.stringify(state.currProject.projectTasks));
             return Object.assign({}, state,
                 {
                     currTask: action.data,
                     currProject: {
-                        projectTasks: state.currProject.projectTasks.push(action.data)
+                        projectTasks: updatedList.push(action.data)
                     }
                 });
         case types.UPDATE_TASK:
             // Check if task is found in any currProject.projectSprints
             found = false;
-            state.currProject.projectSprints.forEach(sprint => {
+            updatedList = JSON.parse(JSON.stringify(state.currProject.projectSprints));
+            updatedList.forEach(sprint => {
                 if (!found) {
                     index = sprint.sprintTasks.findIndex(item => item.id === action.data.id);
                     if (index > -1) {
@@ -114,20 +119,37 @@ export default function projectReducer(state = {}, action) {
 
             // If not found replace in currProject.projectTasks
             if (!found) {
-                index = state.currProject.projectTasks.findIndex(item => item.id === action.data.id);
-                state.currProject.projectTasks.splice(index, 1, action.data);
+                updatedList = JSON.parse(JSON.stringify(state.currProject.projectTasks));
+                index = updatedList.findIndex(item => item.id === action.data.id);
+                updatedList.splice(index, 1, action.data);
             }
 
             // Return modified state
-            return Object.assign({}, state,
-                {
-                    currTask: action.data
-                });
+            if (found) {
+                return Object.assign({}, state,
+                    {
+                        currTask: action.data,
+                        currProject: {
+                            projectSprints: updatedList
+                        }
+                    });
+            } else {
+                return Object.assign({}, state,
+                    {
+                        currTask: action.data,
+                        currProject: {
+                            projectTasks: updatedList
+                        }
+                    });
+            }
+
+
         case types.DELETE_TASK:
             found = false;
 
             // Check if task is found in currProject.projectSprints
-            state.currProject.projectSprints.forEach(sprint => {
+            updatedList = JSON.parse(JSON.stringify(state.currProject.projectSprints));
+            updatedList.forEach(sprint => {
                 if (!found) {
                     index = sprint.sprintTasks.findIndex(item => item.id === action.data.id);
                     if (index > -1) {
@@ -139,16 +161,29 @@ export default function projectReducer(state = {}, action) {
 
             // If not found remove from currProject.projectTasks
             if (!found) {
-                index = state.currProject.projectTasks.findIndex(item => item.id === action.data.id);
-                state.currProject.projectTasks.splice(index, 1);
+                updatedList = JSON.parse(JSON.stringify(state.currProject.projectTasks));
+                index = updatedList.findIndex(item => item.id === action.data.id);
+                updatedList.splice(index, 1);
             }
 
             // Return modified state
-            return Object.assign({}, state,
-                {
-                    currTask: {}
-                });
-
+            if (found) {
+                return Object.assign({}, state,
+                    {
+                        currTask: action.data,
+                        currProject: {
+                            projectSprints: updatedList
+                        }
+                    });
+            } else {
+                return Object.assign({}, state,
+                    {
+                        currTask: action.data,
+                        currProject: {
+                            projectTasks: updatedList
+                        }
+                    });
+            }
 
         default:
             return state;
