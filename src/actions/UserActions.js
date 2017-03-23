@@ -62,6 +62,13 @@ export function getUser(userId) {
     }
 }
 
+export function doLogout() {
+    debugger;
+    return function (dispatch) {
+        return dispatch(logout());
+    }
+}
+
 export function getAllUsers() {
     return function(dispatch) {
         return api.getAllUsers()

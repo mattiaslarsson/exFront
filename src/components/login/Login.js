@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
-import * as userActions from '../../../actions/UserActions';
+import * as userActions from '../../actions/UserActions';
 
 class Login extends Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div className="login-div">
                 <input type="text" placeholder="Username" onChange={(event) => this.changeUsername(event)} />
                 <input type="password" placeholder="password" onChange={(event) => this.changePassword(event)} />
                 <button type="button" onClick={() => this.doLogin()}>OK</button>
@@ -38,6 +38,8 @@ class Login extends Component {
         )
     }
 }
+
+
 function mapStateToProps(state, ownProps) {
     return {
         data: state

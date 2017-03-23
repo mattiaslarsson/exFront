@@ -41,3 +41,8 @@ export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const GET_USER = 'GET_USER';
 export const ADD_USER = 'ADD_USER';
 
+// NAVIGATION ----------------------------------------------------------------------------------------------------------
+export const GOTO_PROJECT = 'GOTO_PROJECT';
+export const GOTO_LOGIN = 'GOTO_LOGIN';
+export const GOTO_HOME = 'GOTO_HOME';
+export const GOTO_ADMIN = 'GOTO_ADMIN';

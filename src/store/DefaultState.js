@@ -16,5 +16,9 @@ export const defaultState = {
     },
     "notes": {
         "currNote": {}
+    },
+    "navigation": {
+        "currPage": "LOGIN",
+        "menuDisplay": false
     }
 };
