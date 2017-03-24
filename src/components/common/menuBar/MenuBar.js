@@ -33,6 +33,7 @@ class MenuBar extends React.Component {
         switch (view) {
             case "LOGOUT":
                 this.props.actions.user.doLogout();
+                this.props.actions.nav.gotoLogin();
                 break;
             case "HOME":
                 this.props.actions.nav.gotoHome();
