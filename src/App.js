@@ -4,8 +4,8 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as navActions from "./actions/NavigationActions";
 
-import Login from './components/login/Login';
-import MenuBar from './components/common/menuBar/MenuBar';
+import Login from "./components/login/Login";
+import MenuBar from "./components/common/menuBar/MenuBar";
 
 class App extends Component {
 
@@ -63,7 +63,9 @@ class App extends Component {
         return (
             <div className="App">
                 {this.getMenuBar()}
-                {this.getView()}
+                <div className="content">
+                    {this.getView()}
+                </div>
             </div>
         );
     }

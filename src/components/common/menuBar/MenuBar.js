@@ -50,13 +50,17 @@ class MenuBar extends React.Component {
     render() {
         return (
             <div className="menubar">
+                <div className="menu-options">
                 <ul>
                     <li onClick={() => this.changeView("HOME")}>Home</li>
                     {this.projectMenuOption()}
                     {this.adminMenuOption()}
                 </ul>
-                <div className="user-div" onClick={() => this.changeView("LOGOUT")}>
-                    <p>Logout</p>
+                </div>
+                <div className="user-div">
+                    <ul>
+                        <li onClick={() => this.changeView("LOGOUT")}>Logout</li>
+                    </ul>
                 </div>
             </div>
         )
