@@ -118,7 +118,7 @@ function addT(data) {
 // CALLS ---------------------------------------------------------------------------------------------------------------
 
 // Project
-export function getProjects(userId) {
+export function getAllProjects(userId) {
     return function (dispatch) {
         return api.getAllProjects(userId)
             .then(response => {

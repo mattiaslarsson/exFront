@@ -7,7 +7,6 @@ div.menubar {
   background-color: black;
   color: white;
 
-
   div.menu-options {
     width: 70%;
     display: inline-block;
@@ -21,23 +20,25 @@ div.menubar {
   }
 
   div.menu-options > ul, div.user-div > ul {
-    font-weight: 300;
-    top: 0;
-    padding-top: 0.4em;
-    padding-right: 1em;
-    padding-bottom: 0.1em;
-    padding-left: 1em;
-    left: 0;
-    margin: 0em;
+    font-weight: 700;
     list-style-type: none;
+    height: 2em;
     li {
+      line-height: 2em;
+      padding-top: 0.4em;
+      padding-bottom: 0.4em;
       padding-left: 0.4em;
       padding-right: 0.4em;
-      margin: 0em;
       display: inline;
     }
     li:hover {
-      color: chocolate;
+      background-color: chocolate;
+    }
+    svg.mini-logo {
+      width: 1.5em;
+      path {
+        fill: white;
+      }
     }
   }
 

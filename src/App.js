@@ -61,9 +61,9 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
+            <div>
                 {this.getMenuBar()}
-                <div className="content">
+                <div className="app">
                     {this.getView()}
                 </div>
             </div>
