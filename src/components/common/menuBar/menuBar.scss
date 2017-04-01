@@ -30,15 +30,13 @@ div.menubar {
       padding-left: 0.4em;
       padding-right: 0.4em;
       display: inline;
+      min-width: 100px;
     }
     li:hover {
       background-color: chocolate;
     }
-    svg.mini-logo {
+    object.mini-logo {
       width: 1.5em;
-      path {
-        fill: white;
-      }
     }
   }
 

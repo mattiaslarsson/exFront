@@ -6,6 +6,7 @@ import * as navActions from "./actions/NavigationActions";
 
 import Login from "./components/login/Login";
 import MenuBar from "./components/common/menuBar/MenuBar";
+import HomePage from './components/home/HomePage';
 
 class App extends Component {
 
@@ -35,7 +36,7 @@ class App extends Component {
 
     homeView() {
         return (
-            <p>home</p>
+            <HomePage />
         )
     }
 

@@ -1,0 +1,14 @@
+
+div.two-column-container {
+
+  margin: 2em;
+
+  .left-column {
+    display: inline-block;
+    width: 50%;
+  }
+  .right-column {
+    display: inline-block;
+    width: 50%;
+  }
+}

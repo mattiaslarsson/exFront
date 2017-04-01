@@ -56,7 +56,7 @@ class MenuBar extends React.Component {
                 <div className="menu-options">
                 <ul>
                     <li onClick={() => this.changeView("HOME")}>
-                        <svg className="mini-logo" src="../../img/kb.svg" type="image/svg+xml" />
+                        <object className="mini-logo" data="../../img/kb_white.svg" type="image/svg+xml" />
                     </li>
                     {this.projectMenuOption()}
                     {this.adminMenuOption()}
