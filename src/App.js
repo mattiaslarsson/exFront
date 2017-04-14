@@ -7,6 +7,7 @@ import * as navActions from "./actions/NavigationActions";
 import Login from "./components/login/Login";
 import MenuBar from "./components/common/menuBar/MenuBar";
 import HomePage from './components/home/HomePage';
+import ProjectPage from './components/project/projectPage/ProjectPage';
 
 class App extends Component {
 
@@ -42,7 +43,7 @@ class App extends Component {
 
     projectView() {
         return (
-            <p>project</p>
+            <ProjectPage />
         )
     }
 

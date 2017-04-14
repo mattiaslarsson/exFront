@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 
 import * as projectActions from '../../../actions/ProjectActions';
+import * as navigationActions from '../../../actions/NavigationActions';
 
 class ProjectCard extends React.Component {
 
@@ -12,12 +13,18 @@ class ProjectCard extends React.Component {
 
     constructor(props) {
         super(props);
-        const selected = false;
+        this.changeProject = this.changeProject.bind(this);
     };
+
+    changeProject() {
+        console.log('Change project');
+        this.props.actions.projActions.setProject(this.props.currProject);
+        this.props.actions.navActions.gotoProject();
+    }
 
     render(){
         return (
-            <div >
+            <div onClick={this.changeProject}>
                 <Paper zDepth={2}>
                     <h4>{this.props.currProject.projectTitle}</h4>
                     <p>{this.props.currProject.projectDescription}</p>
@@ -35,7 +42,10 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(projectActions, dispatch)
+        actions: {
+            projActions: bindActionCreators(projectActions, dispatch),
+            navActions: bindActionCreators(navigationActions, dispatch)
+        }
     }
 }
 

@@ -11,7 +11,6 @@ class projectPage extends React.Component {
         super(props);
         this.onButtonGetAllClick = this.onButtonGetAllClick.bind(this);
         this.onButtonGetOneClick = this.onButtonGetOneClick.bind(this);
-
     }
 
     onButtonGetAllClick() {
@@ -34,8 +33,23 @@ class projectPage extends React.Component {
         }
     }
 
+    getTodoTask() {
+
+    }
+
+    getInProgressTasks() {
+
+    }
+
+    getInTestingTasks() {
+
+    }
+
+    getDoneTasks() {
+
+    }
+
     render() {
-        console.log(JSON.stringify(this.props.project));
         return (
             <div>
                 <input type="text" placeholder="Project ID" onChange={(event) => this.changeProjectId(event)}/>

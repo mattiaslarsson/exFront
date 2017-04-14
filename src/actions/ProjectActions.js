@@ -49,6 +49,13 @@ function addProj(data) {
     }
 }
 
+function setProj(data) {
+    return {
+        type: types.SET_PROJECT,
+        data
+    }
+}
+
 // Sprints
 
 function getS(data) {
@@ -168,6 +175,12 @@ export function addProject(project) {
             .catch(err => {
                 console.log(err);
             });
+    }
+}
+
+export function setProject(project) {
+    return function (dispatch) {
+        dispatch(setProj(project))
     }
 }
 
