@@ -4,8 +4,10 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as navActions from "./actions/NavigationActions";
 
-import Login from './components/login/Login';
-import MenuBar from './components/common/menuBar/MenuBar';
+import Login from "./components/login/Login";
+import MenuBar from "./components/common/menuBar/MenuBar";
+import HomePage from './components/home/HomePage';
+import ProjectPage from './components/project/projectPage/ProjectPage';
 
 class App extends Component {
 
@@ -35,13 +37,13 @@ class App extends Component {
 
     homeView() {
         return (
-            <p>home</p>
+            <HomePage />
         )
     }
 
     projectView() {
         return (
-            <p>project</p>
+            <ProjectPage />
         )
     }
 
@@ -61,9 +63,11 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
+            <div>
                 {this.getMenuBar()}
-                {this.getView()}
+                <div className="app">
+                    {this.getView()}
+                </div>
             </div>
         );
     }

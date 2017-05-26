@@ -49,6 +49,13 @@ function addProj(data) {
     }
 }
 
+function setProj(data) {
+    return {
+        type: types.SET_PROJECT,
+        data
+    }
+}
+
 // Sprints
 
 function getS(data) {
@@ -118,7 +125,7 @@ function addT(data) {
 // CALLS ---------------------------------------------------------------------------------------------------------------
 
 // Project
-export function getProjects(userId) {
+export function getAllProjects(userId) {
     return function (dispatch) {
         return api.getAllProjects(userId)
             .then(response => {
@@ -168,6 +175,12 @@ export function addProject(project) {
             .catch(err => {
                 console.log(err);
             });
+    }
+}
+
+export function setProject(project) {
+    return function (dispatch) {
+        dispatch(setProj(project))
     }
 }
 

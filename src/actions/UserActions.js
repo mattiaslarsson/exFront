@@ -63,7 +63,6 @@ export function getUser(userId) {
 }
 
 export function doLogout() {
-    debugger;
     return function (dispatch) {
         return dispatch(logout());
     }

@@ -1,5 +1,5 @@
 div.menubar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
@@ -7,31 +7,37 @@ div.menubar {
   background-color: black;
   color: white;
 
-  ul {
-    position: absolute;
-    top:0;
-    left: 0;
+  div.menu-options {
+    width: 70%;
+    display: inline-block;
     text-align: left;
-    width: 100%;
-    margin: 0em;
-    padding: 0em;
-    list-style-type: none;
+  }
 
+  div.user-div {
+    width: 30%;
+    display: inline-block;
+    text-align: right;
+  }
+
+  div.menu-options > ul, div.user-div > ul {
+    font-weight: 700;
+    list-style-type: none;
+    height: 2em;
     li {
-      height: 2em;
-      width: 100px;
-      padding-top: 0.5em;
-      padding-right: 1em;
-      padding-bottom: 0.5em;
-      padding-left: 1em;
+      line-height: 2em;
+      padding-top: 0.4em;
+      padding-bottom: 0.4em;
+      padding-left: 0.4em;
+      padding-right: 0.4em;
       display: inline;
+      min-width: 100px;
     }
     li:hover {
       background-color: chocolate;
     }
+    object.mini-logo {
+      width: 1.5em;
+    }
   }
 
-  div.user-div {
-    text-align: right;
-  }
 }

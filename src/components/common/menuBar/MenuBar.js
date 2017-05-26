@@ -4,6 +4,7 @@ import {bindActionCreators} from "redux";
 
 import * as navActions from "../../../actions/NavigationActions";
 import * as userActions from "../../../actions/UserActions";
+import * as projectActions from '../../../actions/ProjectActions';
 
 import './menuBar.css';
 
@@ -36,6 +37,7 @@ class MenuBar extends React.Component {
                 this.props.actions.nav.gotoLogin();
                 break;
             case "HOME":
+                this.props.actions.proj.getAllProjects();
                 this.props.actions.nav.gotoHome();
                 break;
             case "PROJECT":
@@ -51,13 +53,19 @@ class MenuBar extends React.Component {
     render() {
         return (
             <div className="menubar">
+                <div className="menu-options">
                 <ul>
-                    <li onClick={() => this.changeView("HOME")}>Home</li>
+                    <li onClick={() => this.changeView("HOME")}>
+                        <object className="mini-logo" data="../../img/kb_white.svg" type="image/svg+xml" />
+                    </li>
                     {this.projectMenuOption()}
                     {this.adminMenuOption()}
                 </ul>
-                <div className="user-div" onClick={() => this.changeView("LOGOUT")}>
-                    <p>Logout</p>
+                </div>
+                <div className="user-div">
+                    <ul>
+                        <li onClick={() => this.changeView("LOGOUT")}>Logout</li>
+                    </ul>
                 </div>
             </div>
         )
@@ -77,7 +85,8 @@ function mapDispatchToProps(dispatch) {
     return {
         actions: {
             nav: bindActionCreators(navActions, dispatch),
-            user: bindActionCreators(userActions, dispatch)
+            user: bindActionCreators(userActions, dispatch),
+            proj: bindActionCreators(projectActions, dispatch)
         }
     }
 }
