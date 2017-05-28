@@ -13,6 +13,13 @@ export default function userReducer(state = {}, action) {
                     user: action.data.user,
                     loggedIn: action.loggedIn,
                 });
+        case types.LOGIN_FAIL:
+            return Object.assign({}, state,
+                {
+                   token: null,
+                    user: null,
+                    loggedIn: action.loggedIn
+                });
         case types.DO_LOGOUT:
             return Object.assign({}, state,
                 {

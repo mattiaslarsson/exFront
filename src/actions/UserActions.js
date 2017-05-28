@@ -6,8 +6,8 @@ function loginSuccess(data) {
     return {type: types.LOGIN_SUCCESS, data, loggedIn: true, currPage: "HOME"}
 }
 
-function loginFailed(data) {
-    return {type: types.LOGIN_FAIL, data, loggedIn: false}
+function loginFailed() {
+    return {type: types.LOGIN_FAIL, loggedIn: false}
 }
 
 function logout() {
@@ -39,17 +39,18 @@ export function doLogin(username, password) {
     return function (dispatch) {
         return api.doLogin(username, password)
             .then(response => {
-                response.json().then((json) =>
-               dispatch(loginSuccess(json)));
+                if (response.ok) {
+                    response.json().then((json) =>
+                        dispatch(loginSuccess(json)));
+                } else {
+                    dispatch(loginFailed());
+                }
             })
-            .catch(err => {
-                dispatch(loginFailed(err));
-            });
     }
 }
 
 export function getUser(userId) {
-    return function(dispatch) {
+    return function (dispatch) {
         return api.getUser(userId)
             .then(response => {
                 response.json().then(json => {
@@ -69,7 +70,7 @@ export function doLogout() {
 }
 
 export function getAllUsers() {
-    return function(dispatch) {
+    return function (dispatch) {
         return api.getAllUsers()
             .then(response => {
                 response.json().then(json => {
@@ -83,7 +84,7 @@ export function getAllUsers() {
 }
 
 export function addUser(user) {
-    return function(dispatch) {
+    return function (dispatch) {
         return api.postNewUser(user)
             .then(response => {
                 response.json().then(json => {
@@ -97,7 +98,7 @@ export function addUser(user) {
 }
 
 export function deleteUser(userId) {
-    return function(dispatch) {
+    return function (dispatch) {
         return api.deleteUser(userId)
             .then(response => {
                 dispatch(deleteU(userId))
@@ -109,10 +110,10 @@ export function deleteUser(userId) {
 }
 
 export function updateUser(user) {
-    return function(dispatch) {
+    return function (dispatch) {
         return api.updateUser(user)
             .then(response => {
-                response.json().then(json =>{
+                response.json().then(json => {
                     dispatch(updateU(json));
                 })
             })
