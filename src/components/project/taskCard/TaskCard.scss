@@ -13,8 +13,36 @@
   max-width: 90%;
 }
 
+.task-title-container {
+  width: 30%;
+  text-align: left;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.task-title-text-container {
+  width: 70%;
+  text-align: left;
+  display:inline-block;
+  padding-bottom: 10px
+}
+
+.task-description-title-container {
+  width: 100%;
+  text-align: left;
+}
+
+.task-description-text-container {
+  width: 100%;
+  text-align: left;
+}
+
+p {
+  font-size: 1.2em;
+}
+
 p.task-heading {
-  display: inline;
+  display: inline-block;
   color: black;
   opacity: 0.7;
 }
@@ -23,6 +51,7 @@ p.task-title {
   display: inline;
   font-style: oblique;
   color: black;
+  padding-bottom: 10px;
 }
 
 p.task-text {
@@ -30,28 +59,53 @@ p.task-text {
   color: black;
 }
 
-.icon-left {
-  display: inline-block;
-  width: 33%;
-  align: left;
+.icon-container {
+  padding-bottom: 10px;
+  visibility: hidden;
 }
 
-.icon-center {
+.icon-left {
   display: inline-block;
-  width: 33%;
-  align: center;
+  width: 25%;
+  text-align: left;
+}
+
+.icon-center-left {
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+}
+
+.icon-center-right {
+  display: inline-block;
+  width: 25%;
+  text-align: center;
 }
 
 .icon-right {
   display: inline-block;
-  width: 33%;
-  align: right;
+  width: 25%;
+  text-align: right;
 }
 
-icon-show {
-  opacity: 1;
+.icon-show {
+  opacity: 0.4;
 }
 
-icon-hide {
+.icon-hide {
   opacity: 0;
+}
+
+.hidden {
+  visibility: hidden;
+  max-height: 0em;
+  opacity: 0;
+  transition: opacity 0.5s, visibility 0.5s, max-height 0.5s ease-in ;
+}
+
+.showed {
+  max-height: 3em;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.5s, visibility 0.5s, max-height 0.5s ease-in;
 }

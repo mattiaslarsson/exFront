@@ -7,7 +7,7 @@ export default class ProjectColumn extends React.Component{
     getColumnTasks() {
         return this.props.tasks.map((currTask) => {
             return (
-                <TaskCard key={currTask.id} task={currTask} backColor={this.getBackColor(currTask)} />
+                <TaskCard key={currTask.id} task={currTask} backColor={this.getBackColor(currTask)} updateTask={this.props.updateTask} removeTask={this.props.removeTask} />
             )
         });
     }

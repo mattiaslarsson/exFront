@@ -46,9 +46,18 @@ class projectPage extends React.Component {
                     break;
                 default:
                     currTask.taskStatus = "TODO";
-                    this.props.actions.updateTask(currTask);
+                    this.updateTask(currTask);
             }
         })
+    }
+
+    updateTask(currTask) {
+        this.props.actions.updateTask(currTask);
+    }
+
+    removeTask(currTask) {
+        this.props.actions.removeTask(currTask.id);
+
     }
 
     render() {
@@ -59,20 +68,20 @@ class projectPage extends React.Component {
                 </div>
                 <div className="project-column-container">
                     <div className="project-column"><ProjectColumn
-                        key={"todo" + this.props.project.currProject.projectId} title="ToDo"
-                        tasks={this.todoTasks}/>
+                        key={"todo" + this.props.project.currProject.projectId} title="To Do"
+                        tasks={this.todoTasks} updateTask={this.updateTask} removeTask={this.removeTask} />
                     </div>
                     <div className="project-column">
                         <ProjectColumn key={"wip" + this.props.project.currProject.projectId} title="In Progress"
-                                       tasks={this.inProgressTasks}/>
+                                       tasks={this.inProgressTasks} updateTask={this.updateTask} removeTask={this.removeTask} />
                     </div>
                     <div className="project-column">
                         <ProjectColumn key={"testing" + this.props.project.currProject.projectId} title="Testing"
-                                       tasks={this.inTestingTasks}/>
+                                       tasks={this.inTestingTasks} updateTask={this.updateTask} removeTask={this.removeTask} />
                     </div>
                     <div className="project-column">
                         <ProjectColumn key={"done" + this.props.project.currProject.projectId} title="Done"
-                                       tasks={this.doneTasks}/>
+                                       tasks={this.doneTasks} updateTask={this.updateTask} removeTask={this.removeTask} />
                     </div>
                 </div>
             </div>
