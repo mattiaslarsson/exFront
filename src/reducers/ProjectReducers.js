@@ -42,6 +42,11 @@ export default function projectReducer(state = {}, action) {
                 {
                     projectList: updatedList.filter(item => item.id !== action.projectId)
                 });
+        case types.SET_PROJECT:
+            return Object.assign({}, state,
+                {
+                    currProject: action.data
+                });
 
         // Sprint
         case types.GET_SPRINT:
@@ -78,7 +83,7 @@ export default function projectReducer(state = {}, action) {
                 {
                     currSprint: {},
                     currProject: {
-                        projectSprints: updatedList.filter(item => item.id != action.sprintId)
+                        projectSprints: updatedList.filter(item => item.id !== action.sprintId)
                     }
                 });
 

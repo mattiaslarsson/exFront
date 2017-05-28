@@ -10,10 +10,6 @@ import ProjectList from './projectList/ProjectList';
 
 class HomePage extends React.Component {
 
-    constructor(props){
-        super(props);
-    }
-
     render() {
         return (
             <div className="two-column-container">

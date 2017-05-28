@@ -3,7 +3,7 @@ import * as api from "../api/UserApi";
 
 // ACTION PRODUCERS ----------------------------------------------------------------------------------------------------
 function loginSuccess(data) {
-    return {type: types.LOGIN_SUCCESS, data, loggedIn: true}
+    return {type: types.LOGIN_SUCCESS, data, loggedIn: true, currPage: "HOME"}
 }
 
 function loginFailed(data) {

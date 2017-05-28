@@ -11,7 +11,7 @@ export default function userReducer(state = {}, action) {
                 {
                     token: action.data.token,
                     user: action.data.user,
-                    loggedIn: action.loggedIn
+                    loggedIn: action.loggedIn,
                 });
         case types.DO_LOGOUT:
             return Object.assign({}, state,
@@ -40,7 +40,7 @@ export default function userReducer(state = {}, action) {
         case types.DELETE_USER:
             return Object.assign({}, state,
                 {
-                    userList: state.userList.filter(item => item.id != action.userId)
+                    userList: state.userList.filter(item => item.id !== action.userId)
                 });
         case types.UPDATE_USER:
             const index = state.userList.findIndex(item => item.id === action.data.id);

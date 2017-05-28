@@ -11,21 +11,23 @@ import ProjectPage from './components/project/projectPage/ProjectPage';
 
 class App extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     getView() {
 
         switch (this.props.navigation.currPage) {
             case "LOGIN":
-                return this.loginView();
+                if (!this.props.users.loggedIn) {
+                    return this.loginView();
+                } else {
+                    return this.homeView()
+                }
             case "HOME":
                 return this.homeView();
             case "PROJECT":
                 return this.projectView();
             case "ADMIN":
                 return this.adminView();
+            default:
+                return this.loginView();
         }
     }
 

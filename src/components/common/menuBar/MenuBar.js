@@ -14,22 +14,6 @@ class MenuBar extends React.Component {
         this.changeView = this.changeView.bind(this);
     }
 
-    projectMenuOption() {
-        if (this.props.project.currProject !== {}){
-            return (
-                <li onClick={() => this.changeView("PROJECT")}>Project</li>
-            )
-        }
-    }
-
-    adminMenuOption() {
-        if (this.props.users.user.mainRole === "ADMIN") {
-            return (
-                <li onClick={() => this.changeView("ADMIN")}>Admin</li>
-            )
-        }
-    }
-
     changeView(view) {
         switch (view) {
             case "LOGOUT":
@@ -40,15 +24,9 @@ class MenuBar extends React.Component {
                 this.props.actions.proj.getAllProjects();
                 this.props.actions.nav.gotoHome();
                 break;
-            case "PROJECT":
-                this.props.actions.nav.gotoProject();
-                break;
-            case "ADMIN":
-                this.props.actions.nav.gotoAdmin();
-                break;
+            default:
         }
     }
-
 
     render() {
         return (
@@ -56,10 +34,8 @@ class MenuBar extends React.Component {
                 <div className="menu-options">
                 <ul>
                     <li onClick={() => this.changeView("HOME")}>
-                        <object className="mini-logo" data="../../img/kb_white.svg" type="image/svg+xml" />
+                        <object className="mini-logo" data="../../img/kb_white.svg" type="image/svg+xml" onClick={() => this.changeView("HOME")}/>
                     </li>
-                    {this.projectMenuOption()}
-                    {this.adminMenuOption()}
                 </ul>
                 </div>
                 <div className="user-div">
@@ -70,9 +46,7 @@ class MenuBar extends React.Component {
             </div>
         )
     }
-
 }
-
 
 function mapStateToProps(state, ownProps) {
     return {

@@ -31,7 +31,7 @@ export default function(state = {}, action) {
         case types.DELETE_CUSTOMER:
             return Object.assign({}, state,
                 {
-                    customerList: state.customerList.filter(item => item.id != action.customerId)
+                    customerList: state.customerList.filter(item => item.id !== action.customerId)
                 });
 
         default:
