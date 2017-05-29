@@ -6,9 +6,9 @@ import FontAwsome from "react-fontawesome";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as projectActions from "../../../actions/ProjectActions";
+import * as navigationActions from "../../../actions/NavigationActions";
 
 export class TaskCard extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -72,9 +72,6 @@ export class TaskCard extends React.Component {
     }
 
     updateTask(direction) {
-        console.log("Update requested. Direction: "+direction);
-
-
         let index = this.state.taskStatus.indexOf(this.props.task.taskStatus);
         switch (direction) {
             case "LEFT":
@@ -95,8 +92,13 @@ export class TaskCard extends React.Component {
         }
     }
 
-    deleteTask(currTask) {
-        this.props.actions.removeTask(currTask.id);
+    deleteTask(id) {
+        this.props.actions.deleteTask(id);
+    }
+
+    openModal() {
+        this.props.actions.setTask(this.props.task);
+        this.props.navactions.openModal();
     }
 
     render() {
@@ -108,10 +110,20 @@ export class TaskCard extends React.Component {
                         {this.showLeftIcon()}
                     </div>
                     <div className="icon-center-left">
-                        <FontAwsome className={this.state.icon} tag="i" name="pencil-square-o" size="2x"/>
+                        <FontAwsome className={this.state.icon}
+                                    tag="i"
+                                    name="pencil-square-o"
+                                    size="2x"
+                                    onClick={() => this.openModal()}
+                        />
                     </div>
                     <div className="icon-center-right">
-                        <FontAwsome className={this.state.icon} tag="i" name="window-close" size="2x"/>
+                        <FontAwsome className={this.state.icon}
+                                    tag="i"
+                                    name="window-close"
+                                    size="2x"
+                                    onClick={() => this.deleteTask(this.props.task.id)}
+                        />
                     </div>
                     <div className="icon-right">
                         {this.showRightIcon()}
@@ -138,6 +150,7 @@ export class TaskCard extends React.Component {
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(projectActions, dispatch),
+        navactions: bindActionCreators(navigationActions, dispatch)
 
     }
 }

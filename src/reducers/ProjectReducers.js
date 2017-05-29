@@ -5,6 +5,8 @@ export default function projectReducer(state = {}, action) {
     let index = -1;
     let updatedList = [];
     let found = false;
+    let lists = {};
+    let updatedProject = {};
 
     switch (action.type) {
         // Project
@@ -14,11 +16,16 @@ export default function projectReducer(state = {}, action) {
                     projectList: action.data
                 });
         case types.GET_PROJECT:
-            todoTasks = [];
+
+            lists = buildTaskLists(action.data);
 
             return Object.assign({}, state,
                 {
-                    currProject: action.data
+                    currProject: action.data,
+                    todoTasks: lists.todoList,
+                    inProgressTasks: lists.inProgressList,
+                    testTasks: lists.testList,
+                    doneTasks: lists.doneList
                 });
 
         case types.ADD_PROJECT:
@@ -45,9 +52,15 @@ export default function projectReducer(state = {}, action) {
                     projectList: updatedList.filter(item => item.id !== action.projectId)
                 });
         case types.SET_PROJECT:
+            lists = buildTaskLists(action.data);
+
             return Object.assign({}, state,
                 {
-                    currProject: action.data
+                    currProject: action.data,
+                    todoTasks: lists.todoList,
+                    inProgressTasks: lists.inProgressList,
+                    testTasks: lists.testList,
+                    doneTasks: lists.doneList
                 });
 
         // Sprint
@@ -103,13 +116,21 @@ export default function projectReducer(state = {}, action) {
 
         case types.ADD_TASK:
             updatedList = JSON.parse(JSON.stringify(state.currProject.projectTasks));
+            updatedProject = JSON.parse(JSON.stringify(state.currProject));
+            updatedProject.projectTasks = updatedList.push(action.data);
+
+            lists = buildTaskLists(updatedProject);
+
             return Object.assign({}, state,
                 {
                     currTask: action.data,
-                    currProject: {
-                        projectTasks: updatedList.push(action.data)
-                    }
+                    currProject: updatedProject,
+                    todoTasks: lists.todoList,
+                    inProgressTasks: lists.inProgressList,
+                    testTasks: lists.testList,
+                    doneTasks: lists.doneList
                 });
+
         case types.UPDATE_TASK:
             // Check if task is found in any currProject.projectSprints
             found = false;
@@ -131,25 +152,26 @@ export default function projectReducer(state = {}, action) {
                 updatedList.splice(index, 1, action.data);
             }
 
-            // Return modified state
             if (found) {
-                return Object.assign({}, state,
-                    {
-                        currTask: action.data,
-                        currProject: {
-                            projectSprints: updatedList
-                        }
-                    });
+                updatedProject = JSON.parse(JSON.stringify(state.currProject));
+                updatedProject.projectSprints = updatedList;
             } else {
-                return Object.assign({}, state,
-                    {
-                        currTask: action.data,
-                        currProject: {
-                            projectTasks: updatedList
-                        }
-                    });
+                updatedProject = JSON.parse(JSON.stringify(state.currProject));
+                updatedProject.projectTasks = updatedList;
             }
 
+            lists = buildTaskLists(updatedProject);
+
+            // Return new state
+            return Object.assign({}, state,
+                {
+                    currTask: action.data,
+                    currProject: updatedProject,
+                    todoTasks: lists.todoList,
+                    inProgressTasks: lists.inProgressList,
+                    testTasks: lists.testList,
+                    doneTasks: lists.doneList
+                });
 
         case types.DELETE_TASK:
             found = false;
@@ -158,7 +180,7 @@ export default function projectReducer(state = {}, action) {
             updatedList = JSON.parse(JSON.stringify(state.currProject.projectSprints));
             updatedList.forEach(sprint => {
                 if (!found) {
-                    index = sprint.sprintTasks.findIndex(item => item.id === action.data.id);
+                    index = sprint.sprintTasks.findIndex(item => item.id === action.data);
                     if (index > -1) {
                         sprint.sprintTasks.splice(index, 1);
                         found = true;
@@ -169,33 +191,99 @@ export default function projectReducer(state = {}, action) {
             // If not found remove from currProject.projectTasks
             if (!found) {
                 updatedList = JSON.parse(JSON.stringify(state.currProject.projectTasks));
-                index = updatedList.findIndex(item => item.id === action.data.id);
+                index = updatedList.findIndex(item => item.id === action.data);
                 updatedList.splice(index, 1);
             }
 
-            // Return modified state
             if (found) {
-                return Object.assign({}, state,
-                    {
-                        currTask: action.data,
-                        currProject: {
-                            projectSprints: updatedList
-                        }
-                    });
+                updatedProject = JSON.parse(JSON.stringify(state.currProject));
+                updatedProject.projectSprints = updatedList;
             } else {
-                return Object.assign({}, state,
-                    {
-                        currTask: action.data,
-                        currProject: {
-                            projectTasks: updatedList
-                        }
-                    });
+                updatedProject = JSON.parse(JSON.stringify(state.currProject));
+                updatedProject.projectTasks = updatedList;
             }
 
+            lists = buildTaskLists(updatedProject);
+
+            // Return new state
+            return Object.assign({}, state,
+                {
+                    currTask: null,
+                    currProject: updatedProject,
+                    todoTasks: lists.todoList,
+                    inProgressTasks: lists.inProgressList,
+                    testTasks: lists.testList,
+                    doneTasks: lists.doneList
+                });
+
+        case types.SET_TASK:
+            return Object.assign({}, state, {
+                currTask: action.data
+            });
+
+        case types.REMOVE_TASK:
+            return Object.assign({}, state, {
+               currTask: null
+            });
 
         default:
             return state;
     }
+
+    function buildTaskLists(project) {
+        lists = {
+            todoList: [],
+            inProgressList: [],
+            testList: [],
+            doneList: []
+        };
+
+        if (project.projectTasks.length > 0) {
+            project.projectTasks.forEach(currTask => {
+                switch (currTask.taskStatus) {
+                    case "TODO":
+                        lists.todoList.push(currTask);
+                        break;
+                    case "WIP":
+                        lists.inProgressList.push(currTask);
+                        break;
+                    case "TEST":
+                        lists.testList.push(currTask);
+                        break;
+                    case "DONE":
+                        lists.doneList.push(currTask);
+                        break;
+                    default:
+                        lists.todoList.push(currTask);
+                }
+            });
+        }
+
+        if (project.projectSprints.length > 0) {
+            project.projectSprints.forEach(currSprint => {
+                   currSprint.sprintTasks.forEach(currTask => {
+                       switch (currTask.taskStatus) {
+                           case "TODO":
+                               lists.todoList.push(currTask);
+                               break;
+                           case "WIP":
+                               lists.inProgressList.push(currTask);
+                               break;
+                           case "TEST":
+                               lists.testList.push(currTask);
+                               break;
+                           case "DONE":
+                               lists.doneList.push(currTask);
+                               break;
+                           default:
+                               lists.todoList.push(currTask);
+                       }
+                   });
+            });
+        }
+        return lists;
+    }
+
 }
 
 

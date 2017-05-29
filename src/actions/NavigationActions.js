@@ -23,3 +23,15 @@ export function gotoAdmin() {
         type: types.GOTO_ADMIN
     }
 }
+
+export function openModal() {
+    return {
+        type: types.MODAL_OPEN
+    }
+}
+
+export function closeModal() {
+    return {
+        type: types.MODAL_CLOSE
+    }
+}

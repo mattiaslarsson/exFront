@@ -101,10 +101,11 @@ function getAllT(data) {
     }
 }
 
-function deleteT(taskId) {
+function deleteT(data) {
+    console.log(data);
     return {
         type: types.DELETE_TASK,
-        taskId
+        data
     }
 }
 
@@ -122,10 +123,16 @@ function addT(data) {
     }
 }
 
-function sortT(data) {
+function setT(data) {
     return {
-        type: types.SORT_TASK,
+        type: types.SET_TASK,
         data
+    }
+}
+
+function removeT() {
+    return {
+        type: types.REMOVE_TASK
     }
 }
 
@@ -322,8 +329,14 @@ export function updateTask(task) {
     }
 }
 
-export function sortTask(task) {
+export function setTask(task) {
     return function (dispatch) {
-        dispatch(sortT(task));
+        dispatch(setT(task));
+    }
+}
+
+export function removeTask() {
+    return function(dispatch) {
+        dispatch(removeT());
     }
 }

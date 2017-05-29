@@ -8,6 +8,7 @@ import Login from "./components/login/Login";
 import MenuBar from "./components/common/menuBar/MenuBar";
 import HomePage from './components/home/HomePage';
 import ProjectPage from './components/project/projectPage/ProjectPage';
+import TaskModal from './components/project/taskModal/TaskModal';
 
 class App extends Component {
 
@@ -68,6 +69,7 @@ class App extends Component {
             <div>
                 {this.getMenuBar()}
                 <div className="app">
+                    <TaskModal />
                     {this.getView()}
                 </div>
             </div>

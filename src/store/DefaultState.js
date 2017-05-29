@@ -1,7 +1,8 @@
 export const defaultState = {
     "projects": {
         "projectList": [],
-        "currProject": {}
+        "currProject": {},
+        "currTask": null
     },
     "users": {
         "loggedIn": false,
@@ -19,6 +20,7 @@ export const defaultState = {
     },
     "navigation": {
         "currPage": "LOGIN",
-        "menuDisplay": false
+        "menuDisplay": false,
+        "modalOpen": false
     }
 };
