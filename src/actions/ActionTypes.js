@@ -12,6 +12,7 @@ export const DELETE_TASK = 'DELETE_TASK';
 export const ADD_TASK = 'ADD_TASK';
 export const GET_ALL_TASKS = 'GET_ALL_TASKS';
 export const GET_TASK = 'GET_TASK';
+export const SORT_TASK = 'SORT_TASK';
 
 // SPRINT --------------------------------------------------------------------------------------------------------------
 export const GET_SPRINT = 'GET_SPRINT';

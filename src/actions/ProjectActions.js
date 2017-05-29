@@ -122,6 +122,13 @@ function addT(data) {
     }
 }
 
+function sortT(data) {
+    return {
+        type: types.SORT_TASK,
+        data
+    }
+}
+
 // CALLS ---------------------------------------------------------------------------------------------------------------
 
 // Project
@@ -312,5 +319,11 @@ export function updateTask(task) {
             .catch(err => {
                 console.log(err);
             });
+    }
+}
+
+export function sortTask(task) {
+    return function (dispatch) {
+        dispatch(sortT(task));
     }
 }

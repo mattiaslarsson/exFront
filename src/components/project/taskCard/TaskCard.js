@@ -3,7 +3,11 @@ import Paper from "material-ui/Paper";
 import "./TaskCard.css";
 import FontAwsome from "react-fontawesome";
 
-export default class TaskCard extends React.Component {
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import * as projectActions from "../../../actions/ProjectActions";
+
+export class TaskCard extends React.Component {
 
     constructor(props) {
         super(props);
@@ -19,9 +23,8 @@ export default class TaskCard extends React.Component {
         };
         this.onMouseOver = this.onMouseOver.bind(this);
         this.onMouseLeave = this.onMouseLeave.bind(this);
-        this.updateTask = this.updateTask.bind(this);
-        this.deleteTask = this.deleteTask.bind(this);
-
+        this.showRightIcon = this.showRightIcon.bind(this);
+        this.showLeftIcon = this.showLeftIcon.bind(this);
     }
 
     onMouseOver() {
@@ -49,7 +52,7 @@ export default class TaskCard extends React.Component {
                             tag="i"
                             name="chevron-circle-left"
                             size="2x"
-                onClick={this.updateTask("LEFT")}
+                onClick={() => this.updateTask("LEFT")}
                 />
             )
         }
@@ -62,7 +65,7 @@ export default class TaskCard extends React.Component {
                             tag="i"
                             name="chevron-circle-right"
                             size="2x"
-                            onClick={this.updateTask("RIGHT")}
+                            onClick={() => this.updateTask("RIGHT")}
                 />
             )
         }
@@ -70,26 +73,30 @@ export default class TaskCard extends React.Component {
 
     updateTask(direction) {
         console.log("Update requested. Direction: "+direction);
+
+
         let index = this.state.taskStatus.indexOf(this.props.task.taskStatus);
         switch (direction) {
             case "LEFT":
                 if (index > 0) {
-                    this.props.task.taskStatus = this.state.taskStatus[index - 1];
+                    let changedTask = JSON.parse(JSON.stringify(this.props.task));
+                    changedTask.taskStatus = this.state.taskStatus[index - 1];
+                    this.props.actions.updateTask(changedTask);
                 }
-                this.props.updateTask(this.props.task);
                 break;
             case "RIGHT":
                 if (index < this.state.taskStatus.length - 1) {
-                    this.props.task.taskStatus = this.state.taskStatus[index + 1];
+                    let changedTask = JSON.parse(JSON.stringify(this.props.task));
+                    changedTask.taskStatus = this.state.taskStatus[index + 1];
+                    this.props.actions.updateTask(changedTask);
                 }
-                this.props.updateTask(this.props.task);
                 break;
             default:
         }
     }
 
     deleteTask(currTask) {
-        this.props.removeTask(currTask.id);
+        this.props.actions.removeTask(currTask.id);
     }
 
     render() {
@@ -126,3 +133,13 @@ export default class TaskCard extends React.Component {
         )
     }
 }
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(projectActions, dispatch),
+
+    }
+}
+
+export default connect(null, mapDispatchToProps)(TaskCard);

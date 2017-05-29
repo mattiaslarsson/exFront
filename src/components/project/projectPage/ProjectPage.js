@@ -69,19 +69,19 @@ class projectPage extends React.Component {
                 <div className="project-column-container">
                     <div className="project-column"><ProjectColumn
                         key={"todo" + this.props.project.currProject.projectId} title="To Do"
-                        tasks={this.todoTasks} updateTask={this.updateTask} removeTask={this.removeTask} />
+                        tasks={this.todoTasks} />
                     </div>
                     <div className="project-column">
                         <ProjectColumn key={"wip" + this.props.project.currProject.projectId} title="In Progress"
-                                       tasks={this.inProgressTasks} updateTask={this.updateTask} removeTask={this.removeTask} />
+                                       tasks={this.inProgressTasks} />
                     </div>
                     <div className="project-column">
                         <ProjectColumn key={"testing" + this.props.project.currProject.projectId} title="Testing"
-                                       tasks={this.inTestingTasks} updateTask={this.updateTask} removeTask={this.removeTask} />
+                                       tasks={this.inTestingTasks} />
                     </div>
                     <div className="project-column">
                         <ProjectColumn key={"done" + this.props.project.currProject.projectId} title="Done"
-                                       tasks={this.doneTasks} updateTask={this.updateTask} removeTask={this.removeTask} />
+                                       tasks={this.doneTasks} />
                     </div>
                 </div>
             </div>

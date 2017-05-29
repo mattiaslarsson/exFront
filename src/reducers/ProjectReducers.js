@@ -14,6 +14,8 @@ export default function projectReducer(state = {}, action) {
                     projectList: action.data
                 });
         case types.GET_PROJECT:
+            todoTasks = [];
+
             return Object.assign({}, state,
                 {
                     currProject: action.data
@@ -190,7 +192,10 @@ export default function projectReducer(state = {}, action) {
                     });
             }
 
+
         default:
             return state;
     }
 }
+
+
