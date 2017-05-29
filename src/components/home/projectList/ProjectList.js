@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as projectActions from "../../../actions/ProjectActions";
 
+import './ProjectList.css';
+
 import ProjectCard from '../projectCard/ProjectCard';
 
 class ProjectList extends React.Component {

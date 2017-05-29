@@ -117,7 +117,8 @@ export default function projectReducer(state = {}, action) {
         case types.ADD_TASK:
             updatedList = JSON.parse(JSON.stringify(state.currProject.projectTasks));
             updatedProject = JSON.parse(JSON.stringify(state.currProject));
-            updatedProject.projectTasks = updatedList.push(action.data);
+            updatedList.push(action.data);
+            updatedProject.projectTasks = updatedList;
 
             lists = buildTaskLists(updatedProject);
 
@@ -231,6 +232,7 @@ export default function projectReducer(state = {}, action) {
     }
 
     function buildTaskLists(project) {
+
         lists = {
             todoList: [],
             inProgressList: [],

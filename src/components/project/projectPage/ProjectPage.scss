@@ -7,6 +7,7 @@ div.project-header {
   width: 100%;
   background-color: #555555;
   p {
+    padding-left: 10px;
     font-size: 2em;
     font-style: oblique;
     color: white;
@@ -22,9 +23,22 @@ div.project-column {
   width: 25%;
   box-shadow: 0px 0px 0px 2px black inset;
   height: 100vh;
-
-  //border: 2px solid #333333;
 }
+
+div.project-name {
+  width: 75%;
+  display: inline-block;
+}
+
+div.project-add-task {
+  width: 25%;
+  text-align: right;
+  display: inline-block;
+  i {
+    padding-right: 10px;
+  }
+}
+
 
 
 

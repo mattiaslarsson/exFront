@@ -1,11 +1,17 @@
+div.heading {
+  padding-top: 4em;
+  margin-left: 2em;
+}
 
 div.two-column-container {
-
-  margin: 2em;
+  display: flex;
+  margin-top: 2em;
+  margin-left: 2em;
 
   .left-column {
     display: inline-block;
     width: 50%;
+    vertical-align: top;
   }
   .right-column {
     display: inline-block;

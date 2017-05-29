@@ -1,7 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
+import FontAwsome from "react-fontawesome";
 import {bindActionCreators} from "redux";
 import * as projectActions from "../../../actions/ProjectActions";
+import * as navigationActions from "../../../actions/NavigationActions";
 
 import './ProjectPage.css'
 
@@ -9,11 +11,26 @@ import ProjectColumn from "../projectColumn/ProjectColumn";
 
 class projectPage extends React.Component {
 
+    addTask() {
+        this.props.actions.removeTask();
+        this.props.navactions.openModal();
+    }
+
     render() {
         return (
             <div className="project-container">
                 <div className="project-header">
-                    <p>{this.props.project.currProject.projectTitle} {this.props.project.currProject.id}</p>
+                    <div className="project-name">
+                    <p>{this.props.project.currProject.projectTitle}</p>
+                    </div>
+                    <div className="project-add-task">
+                        <FontAwsome
+                            tag="i"
+                            inverse={true}
+                            name="plus-circle"
+                            size="2x"
+                            onClick={() => this.addTask()} />
+                    </div>
                 </div>
                 <div className="project-column-container">
                     <div className="project-column"><ProjectColumn
@@ -48,6 +65,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(projectActions, dispatch),
+        navactions: bindActionCreators(navigationActions, dispatch)
 
     }
 }

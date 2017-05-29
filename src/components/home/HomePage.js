@@ -12,14 +12,18 @@ class HomePage extends React.Component {
 
     render() {
         return (
-            <div className="two-column-container">
-                <div className="left-column">
-                    <InfoPane currUser={this.props.users.user} />
-                    <p>left column</p>
+            <div>
+                <div className="heading">
+                    <h1>Welcome back {this.props.users.user.userFirstName} {this.props.users.user.userSurName}</h1>
                 </div>
-                <div className="right-column">
-                    <ProjectList />
-                    <p>right column</p>
+
+                <div className="two-column-container">
+                    <div className="left-column">
+                        <InfoPane currUser={this.props.users.user}/>
+                    </div>
+                    <div className="right-column">
+                        <ProjectList />
+                    </div>
                 </div>
             </div>
         )

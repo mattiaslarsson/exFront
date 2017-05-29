@@ -102,7 +102,6 @@ function getAllT(data) {
 }
 
 function deleteT(data) {
-    console.log(data);
     return {
         type: types.DELETE_TASK,
         data
