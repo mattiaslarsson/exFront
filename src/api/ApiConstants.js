@@ -17,7 +17,7 @@ export const AUTH_HEADER = () => {
 
 // URLS
 
-export const BASE_URL = "http://localhost:8080/";
+export const BASE_URL = "http://ec2-35-158-39-99.eu-central-1.compute.amazonaws.com:8080/";
 export const LOGIN = "login";
 export const USER = "user/";
 export const PROJECT = "project/";
